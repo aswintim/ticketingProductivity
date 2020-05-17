@@ -45,7 +45,8 @@
 height: 100%;
 }
 
-@media (min-width: 500px){
+/* in desktop version */
+@media (min-width: 501px){
     .hamburger{
         display: none;
     }

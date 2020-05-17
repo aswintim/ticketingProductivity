@@ -4,19 +4,16 @@ import classes from './SideDrawer.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
-const sideDrawer = (props)=>{
- const showSideDrawer = props.showDrawerHandler ? 
- <Aux>
- <div className={classes.sideDrawer}
-//  style={{transform: props.showDrawerHandler ? 'translateX(0)' : 'translateX(-100vh)'}}
- />
- <Backdrop removeDrawerHandler={props.removeDrawerHandler}/>
- </Aux>
- : null;
- 
+const sideDrawer = (props)=>{ 
  return(
  <div>
-{showSideDrawer}
+     <div className={classes.sideDrawer}
+     style={{'transform': props.showDrawerHandler ? 'translateX(0)' : 'translateX(-100vh)'}}>
+         <NavigationItems/>
+     </div>
+
+     <div style={{'display': props.showDrawerHandler ? 'block' : 'none'}}><Backdrop removeDrawerHandler={props.removeDrawerHandler} /></div>
+
 </div>
 
 )
