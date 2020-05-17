@@ -1,0 +1,15 @@
+.navItems{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* width: 100% should have covered whole toolbar??? */
+    width: 100%;
+}
+
+@media (max-width: 500px){
+    .navItems{
+        flex-direction: column
+    }
+}
