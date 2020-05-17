@@ -1,0 +1,39 @@
+.newPost{
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    align-items: center;
+}
+
+.newPost label{
+    margin: 10px auto;
+    font-weight: bold;
+}
+
+.newPost input, textarea, select{
+    width: 80%;
+    margin: auto;
+    font: inherit;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.newPost button{
+    margin: 5px 0;
+    padding: 10px;
+    width : 90px;
+    color: #fa923f;
+    cursor: pointer;
+    border: 1px solid #fa923f;
+    background: transparent;
+}
+
+.newPost button:hover,
+.newPost button:active{
+    color:white;
+    background: #fa923f;
+}

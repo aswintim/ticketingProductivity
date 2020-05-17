@@ -1,21 +1,16 @@
 /* in phone mode */
 .navItem{
     list-style: none;
-    /* why display:block??? */
     box-sizing: border-box;
-    
-    /* display:block; */
-}
+    }
 
 /* in desktop mode */
 @media (min-width: 501px){
     .navItem{
         width: auto;
-        /* height: 100%; */
     }
 
     .navItem a {
-        /* height: 100%; */
         display: block;
         padding: 16px 10px;
     }
@@ -42,7 +37,6 @@
     text-decoration: none;
     color: #1c2833;
     width: 100%;
-    /* display block?? */
     display: block;
     box-sizing: border-box;
 }
@@ -50,6 +44,6 @@
 .navItem a:hover,
 .navItem a:active{
     background-color: #abd7eb;
-    border-bottom: 4px solid #8F5C2C;
+    border-bottom: 4px solid white;
 }
 

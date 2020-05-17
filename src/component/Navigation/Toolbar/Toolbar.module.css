@@ -12,6 +12,7 @@
     padding: 0 20px;
     z-index: 90;
     box-sizing: border-box;
+    border-bottom: 4px solid #8F5C2C;
 }
 
 /* in mobile version */
