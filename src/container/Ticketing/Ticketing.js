@@ -6,13 +6,19 @@ import FullPost from '../../component/Tickets/FullPost/FullPost';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 class Ticketing extends Component{
+    state={
+        posts:[]
+    }
+
     render(){
         return(
         <Aux>
             <section>
                 <NewPost/>
             </section>
-            <section>
+            <section className={classes.post}>
+                <Post/>
+                <Post/>
                 <Post/>
             </section>
             <section>

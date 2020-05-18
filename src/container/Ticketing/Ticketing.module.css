@@ -1,3 +1,9 @@
-h1{
-    text-align:center;
+.post{
+    display: flex;
+    flex-flow: row wrap;
+    width: 80%;
+    margin: 50px auto;
+    justify-content: center;
+    
+
 }
