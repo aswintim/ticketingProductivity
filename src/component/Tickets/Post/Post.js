@@ -4,9 +4,9 @@ import classes from './Post.module.css';
 
 const post = (props) => {
     return(
-        <div className={classes.post}>
-            <h1>Title</h1>
-            <div className={classes.author}>Aswin</div>
+        <div className={classes.post} onClick={props.fullPostHandler}>
+            <h1>{props.title}</h1>
+    <div className={classes.author}>{props.author}</div>
         </div>
 
     )
