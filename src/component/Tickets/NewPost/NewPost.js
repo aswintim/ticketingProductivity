@@ -1,25 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './NewPost.module.css';
 
-const newPost = (props) => {
-    return(
-        <div className={classes.newPost}>
-            <h1>Add a Post</h1>
+class newPost extends Component {
+    render() {
 
-            <label>Title</label>
-            <input type="text" />
 
-            <label>Content</label>
-            <textarea rows="4"/>
+        return (
+            <div className={classes.newPost}>
+                <h1>Add a Ticket</h1>
 
-            <label>Author</label>
-            <select>
-                <option value="Tanu">Tanu</option>
-                <option value="Manu">Manu</option>
-            </select>
-            
-            <button>Add Post</button>
-        </div>
-    )
+                <label>Title</label>
+                <input type="text" />
+
+                <label>Description</label>
+                <textarea rows="4" />
+
+                <button >Add Post</button>
+            </div>
+        )
+    }
 }
 export default newPost;

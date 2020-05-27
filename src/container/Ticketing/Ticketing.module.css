@@ -4,6 +4,22 @@
     width: 80%;
     margin: 50px auto;
     justify-content: center;
-    
-
 }
+
+.newPostButton{
+    margin: 5px 0;
+    padding: 10px;
+    width : 90px;
+    color: #fa923f;
+    cursor: pointer;
+    border: 1px solid #fa923f;
+    background: transparent;
+    border-radius: 13px;
+}
+
+.newPostButton:hover,
+.newPostButton:active{
+    color:white;
+    background: #32CD32;
+}
+

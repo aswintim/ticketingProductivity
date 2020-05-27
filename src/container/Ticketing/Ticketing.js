@@ -5,46 +5,46 @@ import Post from '../../component/Tickets/Post/Post';
 import FullPost from '../../component/Tickets/FullPost/FullPost';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import axios from 'axios';
+import Modal from '../../component/UI/Modal/Modal';
+import Posts from '../../component/Tickets/Posts/Posts';
 
 class Ticketing extends Component{
     state={
-        posts:[],
-        postId: null
+        newPostModalShow: false
 
     }
 
-    componentDidMount(){
-        axios.get('http://jsonplaceholder.typicode.com/posts')
-        .then(response=>{
-            const sliced = response.data.slice(0,4);
-            const transformed= sliced.map(res=>{
-                return {...res, author: 'Timalsina'}
-            })
-            this.setState({posts: transformed})
-        })
+    // fullPostHandler=(id)=>{
+    //     this.setState((prevState)=>{
+    //         return {postId: id}
+    //     })
+    // }
+
+    newPostHandler=()=>{
+        this.setState({newPostModalShow:true})
     }
 
-    fullPostHandler=(id)=>{
-        this.setState((prevState)=>{
-            return {postId: id}
-        })
+    removeModalHandler=()=>{
+        this.setState({newPostModalShow: false})
     }
 
     render(){
-        const posts = this.state.posts.map(res=>{
-            return <Post key={res.id} title={res.title} author={res.author} fullPostHandler={()=>this.fullPostHandler(res.id)}/>
-        })
+
         return(
         <Aux>
-            <section>
-                <NewPost/>
+            <section className="newButton" style={{textAlign: 'center'}}>
+                <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button>
+                <Modal modalShow={this.state.newPostModalShow} removeModalHandler={this.removeModalHandler}>
+                    <NewPost/>
+                </Modal>
+
             </section>
             <section className={classes.post}>
-                {posts}
+                <Posts/>
             </section>
-            <section>
+            {/* <section>
                 <FullPost id={this.state.postId}/>
-            </section>
+            </section> */}
         </Aux>
         )
     }

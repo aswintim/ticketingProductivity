@@ -1,7 +1,7 @@
 import React from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.module.css';
-import Backdrop from '../Backdrop/Backdrop';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const sideDrawer = (props)=>{ 
  return(
