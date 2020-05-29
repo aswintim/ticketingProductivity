@@ -1,7 +1,4 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
-const firebaseConfig = {
+export const DB_CONFIG = {
     apiKey: "AIzaSyA4VQXraKSivVydizexhs9KKRtAEgJKBOs",
     authDomain: "ticketing-d7350.firebaseapp.com",
     databaseURL: "https://ticketing-d7350.firebaseio.com",
@@ -11,9 +8,3 @@ const firebaseConfig = {
     appId: "1:354891909431:web:73325359e5abf58a3b72b2",
     measurementId: "G-Q2GHJHW6CJ"
 }
-
-firebase.initializeApp(firebaseConfig);
-
-export const db = firebase.firestore();
-
-export default firebase;

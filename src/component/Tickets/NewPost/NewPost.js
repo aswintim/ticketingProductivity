@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './NewPost.module.css';
-import {db} from '../../..//services/firebase';
+import {db} from '../../../services/firebase';
 
 class newPost extends Component {
     state={
@@ -11,15 +11,15 @@ class newPost extends Component {
     }
 
 
-    addNewTicket=()=>{
-        db.collection('tickets')
-        .add({
-            title: this.state.title,
-            description: this.state.description,
-            id: this.state.id,
-            time:this.state.time
-        })
-    }
+    // addNewTicket=()=>{
+    //     db.collection('tickets')
+    //     .add({
+    //         title: this.state.title,
+    //         description: this.state.description,
+    //         id: this.state.id,
+    //         time:this.state.time
+    //     })
+    // }
 
     resetHandler=()=>{
         this.setState({title: '',

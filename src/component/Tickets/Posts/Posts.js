@@ -2,25 +2,31 @@ import React, {Component} from 'react';
 import Post from '../Post/Post';
 import axios from 'axios';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
-import {db} from '../../../services/firebase';
+import {DB_CONFIG} from '../../../services/firebase';
+import firebase from 'firebase';
 
 class Posts extends Component{
-    state={
-        tickets:null
+    constructor(){
+        this.app = firebase.initializeApp(DB_CONFIG);
+        this.db=this.app.database().ref().child('tickets');
     }
 
-    componentDidMount(){
-        db.collection('tickets').orderBy('time')
-        .get()
-        .then(snapshot=>{
-            const ticks = [];
-            snapshot.forEach(doc=>{
-                ticks.push(doc.data());
-            })
-            this.setState({tickets:ticks})
-        })
-        .catch(error=>{console.log(error)})
+    state={
+        tickets:[]
     }
+
+    // componentDidMount(){
+    //     db.collection('tickets').orderBy('time')
+    //     .get()
+    //     .then(snapshot=>{
+    //         const ticks = [];
+    //         snapshot.forEach(doc=>{
+    //             ticks.push(doc.data());
+    //         })
+    //         this.setState({tickets:ticks})
+    //     })
+    //     .catch(error=>{console.log(error)})
+    // }
 
     render(){
         // const posts = this.state.posts.map(res=>{
