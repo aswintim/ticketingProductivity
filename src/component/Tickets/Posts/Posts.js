@@ -6,24 +6,29 @@ import {db} from '../../../services/firebase';
 
 class Posts extends Component{
     state={
-        posts:[],
-        postId:null
+        tickets:null
     }
 
     componentDidMount(){
-        axios.get('http://jsonplaceholder.typicode.com/posts')
-        .then(response=>{
-            const sliced = response.data.slice(0,4);
-            const transformed= sliced.map(res=>{
-                return {...res, author: 'Timalsina'}
+        db.collection('tickets').orderBy('time')
+        .get()
+        .then(snapshot=>{
+            const ticks = [];
+            snapshot.forEach(doc=>{
+                ticks.push(doc.data());
             })
-            this.setState({posts: transformed})
+            this.setState({tickets:ticks})
         })
+        .catch(error=>{console.log(error)})
     }
 
     render(){
-        const posts = this.state.posts.map(res=>{
-            return <Post key={res.id} title={res.title} author={res.author} fullPostHandler={()=>this.fullPostHandler(res.id)} />   })
+        // const posts = this.state.posts.map(res=>{
+        //     return <Post key={res.id} title={res.title} author={res.author} fullPostHandler={()=>this.fullPostHandler(res.id)} />   })
+
+        const posts = this.state.tickets && this.state.tickets.map(ticket=>{
+            return(<Post key={ticket.id} title={ticket.title} description={ticket.description} time={ticket.time}/>)
+        })
        return(
            <Aux>{posts}</Aux>
        )                  

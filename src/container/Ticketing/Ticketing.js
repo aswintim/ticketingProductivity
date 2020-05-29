@@ -28,6 +28,7 @@ class Ticketing extends Component{
         this.setState({newPostModalShow: false})
     }
 
+    
     render(){
 
         return(
@@ -35,7 +36,7 @@ class Ticketing extends Component{
             <section className="newButton" style={{textAlign: 'center'}}>
                 <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button>
                 <Modal modalShow={this.state.newPostModalShow} removeModalHandler={this.removeModalHandler}>
-                    <NewPost/>
+                    <NewPost removeModalHandler={this.removeModalHandler}/>
                 </Modal>
 
             </section>
@@ -49,5 +50,6 @@ class Ticketing extends Component{
         )
     }
 }
+
 
 export default Ticketing;
