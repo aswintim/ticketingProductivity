@@ -6,8 +6,7 @@ class newPost extends Component {
     state={
         title: '',
         description:'',
-        time: new Date(),
-        id: 5
+        time: new Date()
     }
 
 
@@ -16,7 +15,6 @@ class newPost extends Component {
         .add({
             title: this.state.title,
             description: this.state.description,
-            id: this.state.id,
             time:this.state.time
         })
     }
@@ -24,8 +22,7 @@ class newPost extends Component {
     resetHandler=()=>{
         this.setState({title: '',
         description:'',
-        time: new Date(),
-        id: 5})
+        time: new Date()})
     }
 
     refreshPage =()=>{

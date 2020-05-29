@@ -15,9 +15,12 @@ class Posts extends Component{
         .then(snapshot=>{
             const ticks = [];
             snapshot.forEach(doc=>{
-                ticks.push(doc.data());
+                let dat = doc.data();
+                ticks.push({...dat, id:doc.id});
             })
             this.setState({tickets:ticks})
+            console.log(ticks);
+            
         })
         .catch(error=>{console.log(error)})
     }
