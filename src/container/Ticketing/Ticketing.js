@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import classes from './Ticketing.module.css';
 import NewPost from '../../component/Tickets/NewPost/NewPost';
-import Post from '../../component/Tickets/Post/Post';
-import FullPost from '../../component/Tickets/FullPost/FullPost';
+// import Post from '../../component/Tickets/Post/Post';
+// import FullPost from '../../component/Tickets/FullPost/FullPost';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
-import axios from 'axios';
+// import axios from 'axios';
 import Modal from '../../component/UI/Modal/Modal';
 import Posts from '../../component/Tickets/Posts/Posts';
 
@@ -43,7 +43,11 @@ class Ticketing extends Component{
             <section className={classes.post}>
                 <Posts/>
             </section>
-            {/* <section>
+
+        
+
+
+            {/* <setion>
                 <FullPost id={this.state.postId}/>
             </section> */}
         </Aux>

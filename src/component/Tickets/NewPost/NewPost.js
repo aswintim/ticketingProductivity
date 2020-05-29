@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './NewPost.module.css';
-import {db} from '../../..//services/firebase';
+import {db} from '../../../services/firebase';
 
 class newPost extends Component {
     state={

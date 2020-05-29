@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Toolbar.module.css';
 import NavigationItems from '../NavigationItems/NavigationItems';
+import {NavLink} from 'react-router-dom';
 
 const toolbar = (props) =>(
 <header className={classes.toolbar}>
@@ -9,7 +10,7 @@ const toolbar = (props) =>(
         <div></div>
         <div></div>
     </div>
-    <div>Ticketing</div>
+    <NavLink to='/' style={{textDecoration: 'none', color: 'black'}}>Ticketing</NavLink>
     <nav className={classes.desktopNavItems}><NavigationItems/></nav> 
 </header>
 )
