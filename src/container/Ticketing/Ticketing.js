@@ -50,6 +50,7 @@ class Ticketing extends Component{
             {/* <setion>
                 <FullPost id={this.state.postId}/>
             </section> */}
+            
         </Aux>
         )
     }

@@ -1,0 +1,8 @@
+.comment{
+    border: 1px solid rgb(189, 189, 189);
+    height: 100%;
+    width: 80%;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+}

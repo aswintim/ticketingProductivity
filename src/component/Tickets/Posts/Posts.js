@@ -46,14 +46,14 @@ class Posts extends Component{
             <Post 
             key={ticket.id} 
             title={ticket.title} 
-            escription={ticket.description} 
+            description={ticket.description} 
             time={ticket.time} 
             fullPostHandler={()=>this.postClickHandler(ticket.id)}/>
             </Link>)
         })
        return(
            <Aux>{posts}
-           <Route path='/fullPost/:id' exact component={FullPost} />
+           
            </Aux>
        )                  
     

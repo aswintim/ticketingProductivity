@@ -41,9 +41,17 @@
     box-sizing: border-box;
 }
 
-.navItem a:hover,
-.navItem a:active{
+.navItem a:hover
+/* .navItem a:active, */
+
+{
     background-color: #abd7eb;
+    color:blue;
     border-bottom: 4px solid white;
 }
 
+.navItem a.active{
+    background-color: #abd7eb;
+    color:blue;
+    border-bottom: 4px solid white;
+}
