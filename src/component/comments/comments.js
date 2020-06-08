@@ -14,7 +14,7 @@ class comments extends Component{
         db.collection('tickets')
         .doc(this.props.match.params.id)
         .collection('comment')
-        .orderBy('time')
+        .orderBy('time', 'desc')
         .get().then(snapshot=>{
             const comms = [];
             snapshot.forEach(doc=>{
@@ -29,7 +29,8 @@ class comments extends Component{
     render(){
         const camments = this.state.commens && this.state.commens.map(comms=>{
             return(
-                <Comment usersComment={comms.comment} commentTime={comms.time}/>
+                <div style={{display: 'flex'}}>
+                <Comment usersComment={comms.comment} commentTime={comms.time}/><a href=''>edit</a></div>
             )
         })
         return(

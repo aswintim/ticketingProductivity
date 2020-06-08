@@ -4,6 +4,7 @@ import {db} from '../../../services/firebase';
 import moment from 'moment';
 import Comments from '../../comments/comments';
 import CommentBox from '../../commentBox/commentBox';
+import cx from 'classnames';
 
 
 
@@ -42,6 +43,8 @@ posts = <div><h1>{this.state.fullPost.title}</h1>
         
         <div className={classes.fullPost}>
             {posts}
+           <div className={classes.crossOut}><button className={cx(classes.aced, classes.button)}>Aced It!</button>
+            <button className={cx(classes.failed, classes.button)}>Failed It!</button></div> 
             <CommentBox />
             <Comments />
         </div>

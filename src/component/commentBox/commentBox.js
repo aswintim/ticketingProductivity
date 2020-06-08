@@ -12,17 +12,17 @@ class commentBox extends Component {
 
     submitCommentHandler=()=>{
         if(this.state.comment.length > 1){
-        db.collection('tickets').doc(this.props.match.params.id).collection('comment').add({
+        db.collection('tickets')
+        .doc(this.props.match.params.id)
+        .collection('comment')
+        .add({
             comment: this.state.comment,
             time: this.state.time
         }).then(this.refreshPage());
     }
     else{
         alert('Type something in the comment box!')
-    }
-
-        
-        
+    }  
     }
 
     refreshPage=()=>{
