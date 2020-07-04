@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
+import commentReducer from './store/reducers/comment';
+import newPostReducer from './store/reducers/newPost';
+
+
+const rootReducer = combineReducers({
+  comment: commentReducer,
+  newPost: newPostReducer
+})
+
+const store = createStore()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter><App /></BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
