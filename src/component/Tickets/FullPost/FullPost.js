@@ -5,6 +5,7 @@ import moment from 'moment';
 import Comments from '../../comments/comments';
 import CommentBox from '../../commentBox/commentBox';
 import cx from 'classnames';
+import Spinner from '../../UI/Spinner/Spinner';
 
 
 
@@ -29,7 +30,7 @@ componentDidMount(){
 }
 
 render(){
-let posts = "Nothing is here!! :(";
+let posts = <Spinner />
 
 if(this.state.fullPost){
 posts = <div><h1>{this.state.fullPost.title}</h1>
