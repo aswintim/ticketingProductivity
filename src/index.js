@@ -5,19 +5,25 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import commentReducer from './store/reducers/comment';
-import newPostReducer from './store/reducers/newPost';
+import newPostReducer from './store/reducers/posts';
+import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
+import {Provider} from 'react-redux'; 
 
 
 const rootReducer = combineReducers({
   comment: commentReducer,
-  newPost: newPostReducer
+  posts: newPostReducer
 })
-
-const store = createStore()
+ 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(thunk)
+));
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter><App /></BrowserRouter>
+    <Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,35 +2,25 @@ import React, {Component} from 'react';
 import Post from '../Post/Post';
 // import axios from 'axios';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
-import {db} from '../../../services/firebase';
-import {Route, Link} from 'react-router-dom';
-import FullPost from '../FullPost/FullPost';
+// import {db} from '../../../services/firebase';
+import {Link} from 'react-router-dom';
+// import FullPost from '../FullPost/FullPost';
 import Spinner from '../../UI/Spinner/Spinner';
+import {connect} from 'react-redux';
+import * as actions from '../../../store/index';
 
 class Posts extends Component{
     state={
-        tickets:null,
+        // tickets:null,
         docSelected:null
     }
 
     componentDidMount(){
-        db.collection('tickets').orderBy('time')
-        .get()
-        .then(snapshot=>{
-            const ticks = [];
-            snapshot.forEach(doc=>{
-                let dat = doc.data();
-                ticks.push({...dat, id:doc.id});
-            })
-            this.setState({tickets:ticks})
-            console.log(ticks);
-            
-        })
-        .catch(error=>{console.log(error)})
+        this.props.onInitPosts();
     }
 
     postClickHandler=(id)=>{
-        this.state.tickets.map((doc)=>{
+        this.props.tickets.map((doc)=>{
             if(doc.id === id){
                 this.setState({docSelected:doc})
             }
@@ -43,8 +33,8 @@ class Posts extends Component{
 
         let posts = <Spinner />
 
-         if(this.state.tickets){
-           posts = this.state.tickets.map(ticket=>{
+         if(this.props.tickets){
+           posts = this.props.tickets.map(ticket=>{
                 return(
                     <Link to={'/fullPost/'+ticket.id} key={ticket.id} style={{textDecoration: 'none', color: 'black'}}>
                 <Post 
@@ -69,4 +59,18 @@ class Posts extends Component{
 }
 }
 
-export default Posts;
+const mapStateToProps = state => {
+    return{
+        tickets: state.posts.tickets
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        onInitPosts: () => dispatch(actions.initPosts)
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
