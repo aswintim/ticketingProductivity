@@ -11,5 +11,6 @@ export{
 
 
 export{
-    authInit
+    authInit,
+    authLogout
 }from './actions/auth';
