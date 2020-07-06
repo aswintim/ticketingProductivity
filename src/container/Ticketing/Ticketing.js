@@ -7,6 +7,8 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 // import axios from 'axios';
 import Modal from '../../component/UI/Modal/Modal';
 import Posts from '../../component/Tickets/Posts/Posts';
+import {connect} from 'react-redux';
+import {NavLink} from 'react-router-dom';
 
 class Ticketing extends Component{
     state={
@@ -34,7 +36,11 @@ class Ticketing extends Component{
         return(
         <Aux>
             <section className="newButton" style={{textAlign: 'center'}}>
-                <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button>
+                
+                {this.props.isAuthenticated ? <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button> : <NavLink to='/authenticate'><button className={classes.newPostButton}>Authenticate First!</button></NavLink>}
+                
+
+
                 <Modal modalShow={this.state.newPostModalShow} removeModalHandler={this.removeModalHandler}>
                     <NewPost removeModalHandler={this.removeModalHandler}/>
                 </Modal>
@@ -57,4 +63,10 @@ class Ticketing extends Component{
 }
 
 
-export default Ticketing;
+const mapStateToProps = state => {
+    return{
+        isAuthenticated: state.auth.userId !== null
+    }
+}
+
+export default connect(mapStateToProps)(Ticketing);

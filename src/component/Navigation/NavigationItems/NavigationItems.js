@@ -5,9 +5,7 @@ import {NavLink} from 'react-router-dom';
 
 const navigationItems = (props)=>(
 <ul className={classes.navItems}>
-    <NavigationItem link="/sign-up">Sign up</NavigationItem>
-    <NavigationItem link="/sign-in">Sign in</NavigationItem>
-
+    <NavigationItem link="/authenticate">Authentication</NavigationItem>
 </ul>
 )
 
