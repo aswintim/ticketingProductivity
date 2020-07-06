@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import classes from './NavigationItems.module.css';
-import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const navigationItems = (props)=>(
-<ul className={classes.navItems}>
-    <NavigationItem link="/authenticate">Authentication</NavigationItem>
+class navigationItems extends Component {
+    render(){
+        return(
+            <ul className={classes.navItems}>
+{this.props.isAuthenticated ? <NavigationItem link="/logout">Logout</NavigationItem> : <NavigationItem link="/authenticate">Authentication</NavigationItem>} 
+    
+
 </ul>
-)
+        )
+    }
 
-export default navigationItems;
+}
+
+const mapStateToProps = state => {
+    return{
+        isAuthenticated: state.auth.userId !== null
+    }
+}
+
+
+export default connect(mapStateToProps)(navigationItems);

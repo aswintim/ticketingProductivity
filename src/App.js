@@ -1,27 +1,46 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Layout from './hoc/layout/Layout';
 import Ticketing from './container/Ticketing/Ticketing';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import FullPost from './component/Tickets/FullPost/FullPost';
 import Auth from './container/Auth/Auth';
+import Logout from './container/Auth/Logout/Logout';
+import {connect} from 'react-redux';
 
-function App() {
+class App extends Component {
+render(){
 
-  return (
+  let routes = (<Switch>
+    <Route path='/' exact component={Ticketing}/>
+    <Route path='/authenticate' component={Auth} />
+    <Redirect to='/'></Redirect>
+    </Switch>)
+
+    if(this.props.isAuthenticated){
+      routes = <Switch>
+      <Route path='/' exact component={Ticketing}/>
+      <Route path='/fullPost/:id' exact component={FullPost} />
+      <Route path='/logout' component={Logout} />
+      <Redirect to='/' ></Redirect>
+      </Switch>
+    }
+
+
+  return(
     <div>
-    
       <Layout>
-      <Switch>
-        <Route path='/' exact component={Ticketing}/>
-        {/* <Route path='/sign-in' component={SignIn}/>
-        <Route path='/sign-up' component={SignUp}/> */}
-        <Route path='/fullPost/:id' exact component={FullPost} />
-        <Route path='/authenticate' component={Auth} />
-        </Switch>
+        {routes}
       </Layout>
     </div>
-  );
+  )
+}
 }
 
-export default App;
+const mapStateToProps = state => {
+  return{
+    isAuthenticated: state.auth.userId !== null
+  }
+}
+
+export default connect(mapStateToProps)(App);
