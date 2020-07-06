@@ -2,7 +2,8 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     tickets: null,
-    error: null
+    error: null,
+    newTicket: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -16,6 +17,18 @@ const reducer = (state=initialState, action) => {
         case actionTypes.FETCH_POSTS_FAILED:
             return{
                 ...state, 
+                error: action.error
+            }
+
+        case actionTypes.ADD_NEW_TICKET_SUCCESS:
+            return{
+                ...state,
+                newTicket: action.newTicket
+            }
+
+        case actionTypes.ADD_NEW_TICKET_FAILED:
+            return{
+                ...state,
                 error: action.error
             }
 

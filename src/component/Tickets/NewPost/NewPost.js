@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import classes from './NewPost.module.css';
+import {connect} from 'react-redux';
+import * as actions from '../../../store/index';
 import {db} from '../../../services/firebase';
+
 
 class newPost extends Component {
     state={
@@ -11,12 +14,7 @@ class newPost extends Component {
 
 
     addNewTicket=()=>{
-        db.collection('tickets')
-        .add({
-            title: this.state.title,
-            description: this.state.description,
-            time:this.state.time
-        })
+        this.props.onAddNewTicket(this.state);
     }
 
     resetHandler=()=>{
@@ -25,16 +23,17 @@ class newPost extends Component {
         time: new Date()})
     }
 
-    refreshPage =()=>{
-        window.location.reload(false);
-    }
+    // refreshPage =()=>{
+    //     window.location.reload(false);
+    // }
 
     
     render() {
         
 
         return (
-            <div className={classes.newPost}>
+            <div>
+                <form onSubmit={this.addNewTicket} className={classes.newPost}>
                 <h1>Add a Ticket</h1>
 
                 <label>Title</label>
@@ -44,11 +43,19 @@ class newPost extends Component {
                 <textarea rows="4" value={this.state.description} onChange={(event)=>this.setState({description: event.target.value})}/>
 
                 <div className={classes.buttons}>
-                <button onClick={()=>{this.addNewTicket(); this.refreshPage() }}>Add Post</button>
+                <button type='submit'>Add Post</button>
                 <button onClick={()=>{this.props.removeModalHandler(); this.resetHandler()}} >Cancel</button>
                 </div>
+                </form>
             </div>
         )
     }
 }
-export default newPost;
+
+const mapDispatchToProps = dispatch => {
+    return{
+        onAddNewTicket: (data)=>dispatch(actions.addNewTicket(data))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(newPost);

@@ -9,6 +9,9 @@ import newPostReducer from './store/reducers/posts';
 import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux'; 
+import {reduxFirestore, getFirestore} from 'redux-firestore';
+import {reactReduxFirebase, getFirebase} from 'react-redux-firebase';
+import fbConfig from './services/firebase';
 
 
 const rootReducer = combineReducers({
@@ -18,7 +21,9 @@ const rootReducer = combineReducers({
  
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(
-  applyMiddleware(thunk)
+  applyMiddleware(thunk.withExtraArgument({getFirestore, getFirebase})),
+  reduxFirestore(fbConfig),
+  reactReduxFirebase(fbConfig)
 ));
 
 ReactDOM.render(

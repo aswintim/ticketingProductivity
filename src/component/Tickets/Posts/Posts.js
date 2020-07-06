@@ -67,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onInitPosts: () => dispatch(actions.initPosts)
+        onInitPosts: () => dispatch(actions.initPosts())
     }
 }
 

@@ -2,36 +2,27 @@ import React, { Component } from 'react';
 import classes from './commentBox.module.css';
 import {withRouter} from 'react-router-dom';
 import { db } from '../../services/firebase';
+import {connect} from 'react-redux';
+import * as actions from '../../store/index';
 
 class commentBox extends Component {
     state = { 
-        comment: '',
-        time: new Date()
-
+        comment: ''
 }
 
     submitCommentHandler=()=>{
         if(this.state.comment.length > 1){
-        db.collection('tickets')
-        .doc(this.props.match.params.id)
-        .collection('comment')
-        .add({
-            comment: this.state.comment,
-            time: this.state.time
-        }).then(this.refreshPage());
+            this.props.onSubmitComment(this.state.comment, this.props.match.params.id);
     }
     else{
         alert('Type something in the comment box!')
     }  
     }
 
-    refreshPage=()=>{
-        window.location.reload(false);
-    }
-
     render() {
         return (
-            <div className={classes.commBox}>
+            <div >
+                <form onSubmit={this.submitCommentHandler} className={classes.commBox}>
                 <textarea
                     className={classes.commentBox}
                     placeholder='Comment...'
@@ -39,12 +30,18 @@ class commentBox extends Component {
                     onChange={(event)=>this.setState({comment: event.target.value})}
                 />
         
-                <button className={classes.newPostButton} 
-                onClick={this.submitCommentHandler}>Comment</button>
+                <button type='submit' className={classes.newPostButton}>Comment</button>
+           </form>
             </div>
         )
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return{
+        onSubmitComment: (comment, id)=>dispatch(actions.submitCommentHandler(comment, id))
+    }
+}
 
-export default withRouter(commentBox);
+
+export default connect(null, mapDispatchToProps)(withRouter(commentBox));
