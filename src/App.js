@@ -7,8 +7,14 @@ import FullPost from './component/Tickets/FullPost/FullPost';
 import Auth from './container/Auth/Auth';
 import Logout from './container/Auth/Logout/Logout';
 import {connect} from 'react-redux';
+import * as actions from './store/index';
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.authCheckState();
+  }
+
 render(){
 
   let routes = (<Switch>
@@ -43,4 +49,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return{
+    authCheckState: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
