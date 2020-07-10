@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "firebase": "^7.14.5",
+    "firebase": "^7.15.5",
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -18,7 +18,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-firestore": "^0.13.0",
+    "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

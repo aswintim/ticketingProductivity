@@ -13,8 +13,14 @@ class newPost extends Component {
     }
 
 
-    addNewTicket=()=>{
-        this.props.onAddNewTicket(this.state);
+    addNewTicket=(event)=>{
+        event.preventDefault();
+        if(this.state.title.trim().length > 0 || this.state.description.trim().length >0 ){
+            this.props.onAddNewTicket({...this.state, userId: this.props.userId});
+        }
+        this.props.removeModalHandler();
+        this.resetHandler();
+        
     }
 
     resetHandler=()=>{
@@ -28,9 +34,7 @@ class newPost extends Component {
     // }
 
     
-    render() {
-        
-
+    render() { 
         return (
             <div>
                 <form onSubmit={this.addNewTicket} className={classes.newPost}>
@@ -52,10 +56,16 @@ class newPost extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return{
+        userId: state.auth.userId
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return{
         onAddNewTicket: (data)=>dispatch(actions.addNewTicket(data))
     }
 }
 
-export default connect(null, mapDispatchToProps)(newPost);
+export default connect(mapStateToProps, mapDispatchToProps)(newPost);
