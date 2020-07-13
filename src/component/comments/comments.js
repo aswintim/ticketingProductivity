@@ -7,9 +7,9 @@ import { firestoreConnect } from 'react-redux-firebase';
 import * as actions from '../../store/index';
 
 class comments extends Component {
-    componentDidMount(){
-        this.props.onGetComment(this.props.match.params.id);
-    }
+    // componentDidMount(){
+    //     this.props.onGetComment(this.props.match.params.id);
+    // }
     render() {
         const camments = this.props.commens && this.props.commens.map(comms => {
             return (
@@ -25,22 +25,22 @@ class comments extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = (state, ownProps) => {
+    console.log('comments000')
+    console.log(state);
     const thisTicket =  state.firestore.ordered.tickets;
-    // console.log('comments')
-    // console.log(thisTicket)
-    // let comment = [];
+    let comment = [];
 
-    // thisTicket.forEach(a=>{
-    //     if(a.comment && a.time){comment.push(a)
-    //     }
-    //     else(comment=null)
-    // })
-    // console.log('comments')
-    // console.log(comment)
+    thisTicket && thisTicket.forEach(a=>{
+        if(a.comment && a.time){comment.push(a)
+        }
+    })
+
+    // console.log('comments1')
+    // console.log(comment);
     return {
-        commens: state.comment.getComments
+        // commens: state.comment.getComments
+        commens : comment
     }
 }
 
@@ -55,10 +55,10 @@ export default compose(
     firestoreConnect(props => 
          [{
         collection: 'tickets',
-    //     doc: props.match.params.id,
-    //     subcollections:[{collection: 'comment',
-    //     orderBy: ['time', 'desc']
-    // }]
+        doc: props.match.params.id,
+        subcollections:[{collection: 'comment',
+        orderBy: ['time', 'desc']
+    }]
 
     }]),
 

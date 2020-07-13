@@ -17,26 +17,36 @@ class App extends Component {
 
 render(){
 
-  let routes = (<Switch>
-    <Route path='/' exact component={Ticketing}/>
-    <Route path='/authenticate' component={Auth} />
-    <Redirect to='/'></Redirect>
-    </Switch>)
 
-    if(this.props.isAuthenticated){
-      routes = <Switch>
-      <Route path='/' exact component={Ticketing}/>
-      <Route path='/fullPost/:id' component={FullPost} />
-      <Route path='/logout' component={Logout} />
-      {/* <Redirect to='/' ></Redirect> */}
-      </Switch>
-    }
+
+
+
+  // let routes = (<Switch>
+  //   <Route path='/' exact component={Ticketing}/>
+  //   <Route path='/authenticate' component={Auth} />
+  //   <Redirect to='/'></Redirect>
+  //   </Switch>)
+
+  //   if(this.props.isAuthenticated){
+  //     routes = <Switch>
+  //     <Route path='/' exact component={Ticketing}/>
+  //     <Route path='/fullPost/:id' component={FullPost} />
+  //     <Route path='/logout' component={Logout} />
+  //     {/* <Redirect to='/' ></Redirect> */}
+  //     </Switch>
+  //   }
 
 
   return(
     <div>
       <Layout>
-        {routes}
+        {/* {routes} */}
+        <Switch>
+        <Route path='/' exact component={Ticketing}/>
+        <Route path='/authenticate' component={Auth} />
+        <Route path='/fullPost/:id' component={FullPost} />
+        <Route path='/logout' component={Logout} /> 
+        </Switch>
       </Layout>
     </div>
   )

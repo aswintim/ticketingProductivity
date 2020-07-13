@@ -59,8 +59,8 @@ const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id;
     const tickets = state.firestore.data.tickets;
     const ticket = tickets ? tickets[id] : null;       //why condition
-    console.log('fullpost')
-    console.log(state)
+    // console.log('fullpost')
+    // console.log(state)
     return {
         fullPost: ticket
     }
