@@ -14,7 +14,9 @@ class comments extends Component {
         const camments = this.props.commens && this.props.commens.map(comms => {
             return (
                 <div key={comms.comment} style={{ display: 'flex' }}>
-                    <Comment usersComment={comms.comment} commentTime={comms.time} /><a href=''>edit</a></div>
+                    <Comment usersComment={comms.comment} commentTime={comms.time} />
+                    {/* <a href=''>edit</a> */}
+                    </div>
             )
         })
         return (

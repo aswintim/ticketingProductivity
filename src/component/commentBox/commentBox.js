@@ -14,6 +14,8 @@ class commentBox extends Component {
         if(this.state.comment.length > 1){
             this.props.onSubmitComment(this.state.comment, this.props.match.params.id);
             this.setState({comment: ''})
+            window.location.reload();
+
     }
     else{
         alert('Type something in the comment box!')

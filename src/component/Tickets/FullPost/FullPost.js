@@ -46,8 +46,8 @@ class FullPost extends Component {
 
             <div className={classes.fullPost}>
                 {posts}
-                <div className={classes.crossOut}><button className={cx(classes.aced, classes.button)}>Aced It!</button>
-                    <button className={cx(classes.failed, classes.button)}>Failed It!</button></div>
+                {/* <div className={classes.crossOut}><button className={cx(classes.aced, classes.button)}>Aced It!</button>
+                    <button className={cx(classes.failed, classes.button)}>Failed It!</button></div> */}
                 <CommentBox />
                 <Comments {...this.props} />
             </div>
