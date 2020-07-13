@@ -19,7 +19,7 @@ export const fetchPostsError = (error) =>{
 export const initPosts = () => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('tickets').orderBy('time').get().then(
+        firestore.collection('tickets').where("userId","==", getState.auth.userId).get().then(
             snapshot=>{
                 const ticks = [];
                 snapshot.forEach(doc=>{

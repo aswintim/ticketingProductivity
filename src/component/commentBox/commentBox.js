@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './commentBox.module.css';
 import {withRouter} from 'react-router-dom';
-import { db } from '../../services/firebase';
 import {connect} from 'react-redux';
 import * as actions from '../../store/index';
 
@@ -10,9 +9,11 @@ class commentBox extends Component {
         comment: ''
 }
 
-    submitCommentHandler=()=>{
+    submitCommentHandler=(event)=>{
+        event.preventDefault();
         if(this.state.comment.length > 1){
             this.props.onSubmitComment(this.state.comment, this.props.match.params.id);
+            this.setState({comment: ''})
     }
     else{
         alert('Type something in the comment box!')

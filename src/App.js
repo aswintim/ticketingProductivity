@@ -26,9 +26,9 @@ render(){
     if(this.props.isAuthenticated){
       routes = <Switch>
       <Route path='/' exact component={Ticketing}/>
-      <Route path='/fullPost/:id' exact component={FullPost} />
+      <Route path='/fullPost/:id' component={FullPost} />
       <Route path='/logout' component={Logout} />
-      <Redirect to='/' ></Redirect>
+      {/* <Redirect to='/' ></Redirect> */}
       </Switch>
     }
 

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Comment from '../comment/comment';
-import { db } from '../../services/firebase';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../../store/index';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-
-
+import * as actions from '../../store/index';
 
 class comments extends Component {
+    componentDidMount(){
+        this.props.onGetComment(this.props.match.params.id);
+    }
     render() {
         const camments = this.props.commens && this.props.commens.map(comms => {
             return (
@@ -27,30 +26,40 @@ class comments extends Component {
 }
 
 const mapStateToProps = (state) => {
+
     const thisTicket =  state.firestore.ordered.tickets;
+    // console.log('comments')
+    // console.log(thisTicket)
+    // let comment = [];
 
-    let comment = [];
-
-    thisTicket.forEach(a=>{
-        if(a.comment && a.time){comment.push(a)
-        }
-        else(comment=null)
-    })
-
+    // thisTicket.forEach(a=>{
+    //     if(a.comment && a.time){comment.push(a)
+    //     }
+    //     else(comment=null)
+    // })
+    // console.log('comments')
+    // console.log(comment)
     return {
-        commens: comment
+        commens: state.comment.getComments
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        onGetComment: (id)=>dispatch(actions.getComments(id))
     }
 }
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(props => 
          [{
         collection: 'tickets',
-        doc: props.match.params.id,
-        subcollections:[{collection: 'comment',
-        orderBy: 'time'
-    }]
+    //     doc: props.match.params.id,
+    //     subcollections:[{collection: 'comment',
+    //     orderBy: ['time', 'desc']
+    // }]
+
     }]),
 
 )(comments);

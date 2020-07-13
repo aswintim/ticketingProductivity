@@ -62,7 +62,7 @@ export const authInit = (email, password, isSignUp) => {
             localStorage.setItem('expirationDate', expirationDate)
             dispatch(authSuccess(response.data.idToken, response.data.localId));       //one is token and another is the id of the user
         }).catch(err=>{
-            dispatch(authFail(err));
+            dispatch(authFail(err.message));
         })
     }
 }
