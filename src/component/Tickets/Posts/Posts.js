@@ -63,7 +63,8 @@ export default compose(
     firestoreConnect(props=> [
         {
             collection: 'tickets',
-            where:["userId","==", props.authId]
+            where:["userId","==", props.authId],
+            // orderBy: ['time', 'asc']
         }
     ])
 )(Posts);
