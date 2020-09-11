@@ -12,6 +12,5 @@ export{
 
 export{
     authInit,
-    authLogout,
-    authCheckState
+    authLogout
 }from './actions/auth';

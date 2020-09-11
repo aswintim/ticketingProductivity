@@ -32,15 +32,15 @@ class Ticketing extends Component{
 
     
     render(){
-
+        
+        const{userLoggedIn} = this.props;
+       
         return(
         <Aux>
             <section className="newButton" style={{textAlign: 'center'}}>
                 
-                {this.props.isAuthenticated ? <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button> : <NavLink to='/authenticate'><button className={classes.newPostButton}>Authenticate First!</button></NavLink>}
-                
-
-
+                {userLoggedIn ? <button className={classes.newPostButton} onClick={this.newPostHandler}>New Post</button> : <NavLink to='/authenticate'><button className={classes.newPostButton}>Authenticate First!</button></NavLink>}
+            
                 <Modal modalShow={this.state.newPostModalShow} removeModalHandler={this.removeModalHandler}>
                     <NewPost removeModalHandler={this.removeModalHandler}/>
                 </Modal>
@@ -65,7 +65,7 @@ class Ticketing extends Component{
 
 const mapStateToProps = state => {
     return{
-        isAuthenticated: state.auth.userId !== null
+        userLoggedIn: !state.firebase.auth.isEmpty
     }
 }
 

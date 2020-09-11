@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import './App.css';
 import Layout from './hoc/layout/Layout';
 import Ticketing from './container/Ticketing/Ticketing';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import FullPost from './component/Tickets/FullPost/FullPost';
 import Auth from './container/Auth/Auth';
 import Logout from './container/Auth/Logout/Logout';
-import {connect} from 'react-redux';
-import * as actions from './store/index';
+// import {connect} from 'react-redux';
+// import * as actions from './store/index';
 
 class App extends Component {
 
@@ -49,16 +49,16 @@ render(){
 }
 }
 
-const mapStateToProps = state => {
-  return{
-    isAuthenticated: state.auth.userId !== null
-  }
-}
+// const mapStateToProps = state => {
+//   return{
+//     isAuthenticated: state.auth.userId !== null
+//   }
+// }
 
-const mapDispatchToProps = dispatch => {
-  return{
-    authCheckState: () => dispatch(actions.authCheckState())
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return{
+//     authCheckState: () => dispatch(actions.authCheckState())
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
