@@ -2,8 +2,6 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     loading: false,
-    userId: null,
-    idToken: null,
     error: null
 }
 
@@ -18,24 +16,19 @@ const reducer = (state=initialState, action) => {
         case actionTypes.AUTH_SUCCESS:
             return{
                 ...state,
-                userId: action.userId,
-                idToken: action.idToken,
                 loading: false
             }
 
         case actionTypes.AUTH_FAIL:
             return{
                 ...state,
-                error: action.error,
+                error: action.error.message,
                 loading: false
             }
 
         case actionTypes.AUTH_LOGOUT:
-            return{
-                ...state,
-                userId: null,
-                idToken: null
-            }
+            console.log('Signed Out!!');
+            return state;
 
         default:
             return state;

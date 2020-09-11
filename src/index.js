@@ -11,7 +11,7 @@ import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux'; 
 import {reduxFirestore, getFirestore, firestoreReducer} from 'redux-firestore';
-import {reactReduxFirebase, getFirebase} from 'react-redux-firebase';
+import {reactReduxFirebase, getFirebase, firebaseReducer} from 'react-redux-firebase';
 import fbConfig from './services/firebase';
 import 'firebase/firestore';
 
@@ -19,6 +19,7 @@ import 'firebase/firestore';
 const rootReducer = combineReducers({
   comment: commentReducer,
   firestore: firestoreReducer,
+  firebase: firebaseReducer,
   posts: newPostReducer,
   auth: authReducer,
   
@@ -28,7 +29,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
   reduxFirestore(fbConfig),
-  reactReduxFirebase(fbConfig)
+  reactReduxFirebase(fbConfig), {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true }
 ));
 
 ReactDOM.render(

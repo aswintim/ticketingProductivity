@@ -50,8 +50,7 @@ class Posts extends Component {
 
 
 const mapStateToProps = state => {
-    console.log('posts')
-    console.log(state.firestore.ordered.tickets)
+    console.log(state)
     return {
         tickets: state.firestore.ordered.tickets,
         authId: state.auth.userId
@@ -63,8 +62,8 @@ export default compose(
     firestoreConnect(props=> [
         {
             collection: 'tickets',
-            where:["userId","==", props.authId],
-            // orderBy: ['time', 'asc']
+            where:[["userId","==", props.authId]],
+            // orderBy: [['time', 'asc']]
         }
     ])
 )(Posts);

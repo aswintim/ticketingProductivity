@@ -17,11 +17,11 @@ return{
 }
 }
 
-export const authStart = () => {
-    return{
-        type: actionTypes.AUTH_START
-    }
-}
+// export const authStart = () => {
+//     return{
+//         type: actionTypes.AUTH_START
+//     }
+// }
 
 
 export const authLogout = () => {
@@ -42,28 +42,34 @@ export const checkAuthTimeout = (expirationTime) =>{
 }
 
 export const authInit = (email, password, isSignUp) => {
-    return dispatch => {
-        dispatch(authStart());
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        }
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        firebase.auth().signInWithEmailAndPassword(email, password).then(()=>{
+            dispatch({type: actionTypes.AUTH_START})
+            dispatch({type: actionTypes.AUTH_SUCCESS})
+        }).catch(err=>{dispatch({type: actionTypes.AUTH_FAIL})})
 
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA4VQXraKSivVydizexhs9KKRtAEgJKBOs';
-        if(!isSignUp){
-            url= 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA4VQXraKSivVydizexhs9KKRtAEgJKBOs';
-        }
+    //     dispatch(authStart());
+    //     const authData = {
+    //         email: email,
+    //         password: password,
+    //         returnSecureToken: true
+    //     }
 
-        axios.post(url, authData).then(response=>{
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn*1000);
-            localStorage.setItem('token', response.data.idToken);
-            localStorage.setItem('userId', response.data.localId);
-            localStorage.setItem('expirationDate', expirationDate)
-            dispatch(authSuccess(response.data.idToken, response.data.localId));       //one is token and another is the id of the user
-        }).catch(err=>{
-            dispatch(authFail(err.message));
-        })
+    //     let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA4VQXraKSivVydizexhs9KKRtAEgJKBOs';
+    //     if(!isSignUp){
+    //         url= 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA4VQXraKSivVydizexhs9KKRtAEgJKBOs';
+    //     }
+
+    //     axios.post(url, authData).then(response=>{
+    //         const expirationDate = new Date(new Date().getTime() + response.data.expiresIn*1000);
+    //         localStorage.setItem('token', response.data.idToken);
+    //         localStorage.setItem('userId', response.data.localId);
+    //         localStorage.setItem('expirationDate', expirationDate)
+    //         dispatch(authSuccess(response.data.idToken, response.data.localId));       //one is token and another is the id of the user
+    //     }).catch(err=>{
+    //         dispatch(authFail(err));
+    //     })
     }
 }
 
