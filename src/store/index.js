@@ -1,6 +1,8 @@
 export{
     initPosts,
-    addNewTicket
+    addNewTicket,
+    ticketAced,
+    ticketFailed
 } from './actions/posts';
 
 

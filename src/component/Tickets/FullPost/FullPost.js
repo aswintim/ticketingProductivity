@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { db } from '../../../services/firebase';
+import * as actions from '../../../store/index';
 
 
 class FullPost extends Component {
@@ -31,6 +32,14 @@ class FullPost extends Component {
 
     // }
 
+    ticketAced=()=>{
+        this.props.ticketAced(this.props.match.params.id);
+    }
+
+    ticketFailed=()=>{
+        this.props.ticketFailed(this.props.match.params.id);
+    }
+
     render() {
         let posts = <Spinner />
         const { fullPost } = this.props;
@@ -46,8 +55,8 @@ class FullPost extends Component {
 
             <div className={classes.fullPost}>
                 {posts}
-                {/* <div className={classes.crossOut}><button className={cx(classes.aced, classes.button)}>Aced It!</button>
-                    <button className={cx(classes.failed, classes.button)}>Failed It!</button></div> */}
+                <div className={classes.crossOut}><button className={classes.newPostButton} onClick={this.ticketAced}>Aced It!</button>
+                    <button className={classes.newPostButton_danger} onClick={this.ticketFailed}>Failed It!</button></div>
                 <CommentBox />
                 <Comments {...this.props} />
             </div>
@@ -66,8 +75,15 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return{
+        ticketAced: (id)=>dispatch(actions.ticketAced(id)),
+        ticketFailed: (id)=>dispatch(actions.ticketFailed(id))
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(props => [
         {
             collection: 'tickets'

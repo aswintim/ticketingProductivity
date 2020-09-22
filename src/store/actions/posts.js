@@ -2,6 +2,15 @@ import * as actionTypes from '../actionTypes';
 // import {db} from '../../services/firebase';
 
 
+export const ticketAced = (id) =>{
+
+}
+
+export const ticketFailed = ()=>{
+
+}
+
+
 export const setPosts = (tickets) => {
     return{
         type: actionTypes.SET_POSTS,

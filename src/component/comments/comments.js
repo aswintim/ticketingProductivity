@@ -28,8 +28,6 @@ class comments extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('comments000')
-    console.log(state);
     const thisTicket =  state.firestore.ordered.tickets;
     let comment = [];
 
