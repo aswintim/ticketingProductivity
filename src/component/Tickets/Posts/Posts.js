@@ -50,8 +50,8 @@ class Posts extends Component {
 
 
 const mapStateToProps = state => {
-    console.log('posts')
-    console.log(state.firestore.ordered.tickets)
+    // console.log('posts')
+    // console.log(state.firestore.ordered.tickets)
     return {
         tickets: state.firestore.ordered.tickets,
         authId: state.auth.userId

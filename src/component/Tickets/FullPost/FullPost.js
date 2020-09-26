@@ -10,9 +10,15 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { db } from '../../../services/firebase';
 import * as actions from '../../../store/index';
+import {Redirect} from 'react-router-dom';
 
 
 class FullPost extends Component {
+
+    state={
+        aced: false,
+        failed: false
+    }
     // state={
     //     fullPost: null
     // }
@@ -34,10 +40,12 @@ class FullPost extends Component {
 
     ticketAced=()=>{
         this.props.ticketAced(this.props.match.params.id);
+        this.setState({aced:true})
     }
 
     ticketFailed=()=>{
         this.props.ticketFailed(this.props.match.params.id);
+        this.setState({failed: true})
     }
 
     render() {
@@ -50,10 +58,21 @@ class FullPost extends Component {
             </div>
         }
 
+        let acedRedirect = null;
+        if(this.state.aced){
+            acedRedirect=<Redirect to='/'/>
+        }
+
+        let failedRedirect = null;
+        if(this.state.failed){
+            failedRedirect=<Redirect to='/'/>
+        }
         return (
 
 
             <div className={classes.fullPost}>
+                {acedRedirect}
+                {failedRedirect}
                 {posts}
                 <div className={classes.crossOut}><button className={classes.newPostButton} onClick={this.ticketAced}>Aced It!</button>
                     <button className={classes.newPostButton_danger} onClick={this.ticketFailed}>Failed It!</button></div>

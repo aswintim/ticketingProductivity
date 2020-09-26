@@ -25,57 +25,39 @@ export const ticketAced = (id) =>{
             }).then(()=>{
                 firestore.collection('tickets').doc(id).delete();
             })
-            
-            // console.log(ret.get('comment'));
-            // firestore.collection('aced').add(ret.data()).then(()=>{
-            //     console.log('added!');
-            // }).catch(err=>{
-            //     console.log(err);
-            // })
         })
-
-        
-        // const doc = firestore.collection('tickets').doc(id).get().then(
-        //     snapshot=>{
-        //         const ticks = [];
-        //         snapshot.forEach(doc=>{
-        //             let dat = doc.data();
-        //             ticks.push({...dat, id: doc.id})
-        //         })
-        //         console.log(ticks);
-        //     }
-        // )
-
-// firestore.collection('aced').add({doc}).then(()=>{
-//             console.log('Success!');
-//         }).catch(err=>{
-//             console.log(err);
-//         })
-   
-
-
-
-        // .then(snapshot=>{
-        //    let com = [];
-        //    snapshot.forEach(doc=>{
-        //        let comms = doc.data();
-        //        com.push(comms);
-        //    })
-        //    console.log(com);
-        // }
-        
-        // )
-        //first clone it to another collection
-        // console.log(doc);
-
-
         //code for deleting the document from tickets
     }
 }
 
-export const ticketFailed = ()=>{
+export const ticketFailed = (id) =>{
+    return (dispatch, getState, {getFirebase, getFirestore})=>{
+        const firestore = getFirestore();
+        // let doc1 = 0;
 
+        const docu = firestore.collection('tickets').doc(id).get().then(ret=>{
+            let metad = {};
+            firestore.collection('tickets').doc(id).collection('comment').get().then(snap=>{
+                
+                const ticks = [];
+                    snap.forEach(doc=>{
+                        let dat = doc.data();
+                        ticks.push({...dat, id: doc.id});
+                        doc.ref.delete();
+                    })
+                 metad = {...ret.data(), comment: {...ticks}};
+            }).then(()=>{
+                firestore.collection('failed').add(metad).catch(err=>{
+                    console.log(err);
+                })
+            }).then(()=>{
+                firestore.collection('tickets').doc(id).delete();
+            })
+        })
+        //code for deleting the document from tickets
+    }
 }
+
 
 
 export const setPosts = (tickets) => {
